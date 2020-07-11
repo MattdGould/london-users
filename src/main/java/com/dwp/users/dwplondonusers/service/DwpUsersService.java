@@ -1,6 +1,7 @@
 package com.dwp.users.dwplondonusers.service;
 
 import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,9 @@ public class DwpUsersService implements UsersService<DwpUserModel> {
 
     private final RestTemplate restTemplate;
 
+    @Value("${dwp.user.service.url}")
+    private String dwpUserServiceUrl;
+
     public DwpUsersService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -21,8 +25,7 @@ public class DwpUsersService implements UsersService<DwpUserModel> {
     @Override
     public List<DwpUserModel> findAll() {
 
-        return getApi("https://bpdts-test-app.herokuapp.com/users", HttpMethod.GET);
-        //return getApi("https://testy.test.co/cake", HttpMethod.GET);
+        return getApi(dwpUserServiceUrl, HttpMethod.GET);
     }
 
     protected <T> List<T> getApi(final String path, final HttpMethod method) {

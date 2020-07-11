@@ -2,6 +2,7 @@ package com.dwp.users.dwplondonusers.service;
 
 import com.dwp.users.dwplondonusers.model.DwpUserModel;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -30,14 +32,21 @@ public class DwpUsersServiceTest {
     @InjectMocks
     private DwpUsersService dwpUsersService;
 
+    private String testUrl = "https://myTestHost.com/TestEndpoint";
     private List<DwpUserModel> dwpUserModels = new ArrayList<>();
+
+    @BeforeEach
+    public void setUp() {
+        //https://bpdts-test-app.herokuapp.com/users
+        ReflectionTestUtils.setField(dwpUsersService, "dwpUserServiceUrl", testUrl);
+    }
 
     @Test
     public void findAllWithRestClientExceptionReturned() {
         RestClientException exception = new RestClientException("Exception message");
 
         Mockito.when(restTemplateMock.exchange(
-                ArgumentMatchers.eq("https://bpdts-test-app.herokuapp.com/users"),
+                ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.eq(HttpMethod.GET),
                 ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
                 ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
@@ -55,7 +64,7 @@ public class DwpUsersServiceTest {
         200, "OK", responseHeaders, new byte[3]);
 
         Mockito.when(restTemplateMock.exchange(
-                ArgumentMatchers.eq("https://bpdts-test-app.herokuapp.com/users"),
+                ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.eq(HttpMethod.GET),
                 ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
                 ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
@@ -71,7 +80,7 @@ public class DwpUsersServiceTest {
         HttpClientErrorException exception = new HttpClientErrorException(HttpStatus.NOT_FOUND);
 
         Mockito.when(restTemplateMock.exchange(
-                ArgumentMatchers.eq("https://bpdts-test-app.herokuapp.com/users"),
+                ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.eq(HttpMethod.GET),
                 ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
                 ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
@@ -86,7 +95,7 @@ public class DwpUsersServiceTest {
     public void findAllWithNoResultsReturned() {
         ResponseEntity<List<DwpUserModel>> responseEntity = new ResponseEntity(dwpUserModels, HttpStatus.OK);
         Mockito.when(restTemplateMock.exchange(
-                ArgumentMatchers.eq("https://bpdts-test-app.herokuapp.com/users"),
+                ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.eq(HttpMethod.GET),
                 ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
                 ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
@@ -102,7 +111,7 @@ public class DwpUsersServiceTest {
         setUpUserModelsListWithResults();
         ResponseEntity<List<DwpUserModel>> responseEntity = new ResponseEntity(dwpUserModels, HttpStatus.OK);
         Mockito.when(restTemplateMock.exchange(
-                ArgumentMatchers.eq("https://bpdts-test-app.herokuapp.com/users"),
+                ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.eq(HttpMethod.GET),
                 ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
                 ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
