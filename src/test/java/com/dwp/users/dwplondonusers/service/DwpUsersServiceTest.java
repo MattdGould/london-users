@@ -10,8 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
@@ -44,11 +46,9 @@ public class DwpUsersServiceTest {
     public void findAllWithRestClientExceptionReturned() {
         RestClientException exception = new RestClientException("Exception message");
 
-        Mockito.when(restTemplateMock.exchange(
+        Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
-                ArgumentMatchers.eq(HttpMethod.GET),
-                ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
-                ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
+                ArgumentMatchers.any()))
                 .thenThrow(exception);
 
         Assertions.assertThrows(RestClientException.class, () -> {
@@ -62,11 +62,9 @@ public class DwpUsersServiceTest {
         UnknownContentTypeException exception = new UnknownContentTypeException(null, MediaType.APPLICATION_ATOM_XML,
         200, "OK", responseHeaders, new byte[3]);
 
-        Mockito.when(restTemplateMock.exchange(
+        Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
-                ArgumentMatchers.eq(HttpMethod.GET),
-                ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
-                ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
+                ArgumentMatchers.any()))
                 .thenThrow(exception);
 
         Assertions.assertThrows(UnknownContentTypeException.class, () -> {
@@ -78,27 +76,25 @@ public class DwpUsersServiceTest {
     public void findAllWith404ErrorReturned() {
         HttpClientErrorException exception = new HttpClientErrorException(HttpStatus.NOT_FOUND);
 
-        Mockito.when(restTemplateMock.exchange(
+        Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
-                ArgumentMatchers.eq(HttpMethod.GET),
-                ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
-                ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
+                ArgumentMatchers.any()))
                 .thenThrow(exception);
 
         Assertions.assertThrows(HttpClientErrorException.class, () -> {
-            dwpUsersService.findAll();;
+            dwpUsersService.findAll();
         });
     }
 
     @Test
     public void findAllWithNoResultsReturned() {
-        ResponseEntity<List<DwpUserModel>> responseEntity = new ResponseEntity(dwpUserModels, HttpStatus.OK);
-        Mockito.when(restTemplateMock.exchange(
+        ResponseEntity<DwpUserModel> responseEntity = new ResponseEntity(dwpUserModels.toArray(), HttpStatus.OK);
+        DwpUserModel[] array = new DwpUserModel[dwpUserModels.size()];
+        array = dwpUserModels.toArray(array);
+        Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
-                ArgumentMatchers.eq(HttpMethod.GET),
-                ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
-                ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
-                .thenReturn(responseEntity);
+                ArgumentMatchers.any()))
+                .thenReturn(new ResponseEntity(array, HttpStatus.OK));
 
         List<DwpUserModel> dwpUserModelsResult = dwpUsersService.findAll();
 
@@ -108,13 +104,12 @@ public class DwpUsersServiceTest {
     @Test
     public void findAllWithResultsReturned() {
         setUpUserModelsListWithResults();
-        ResponseEntity<List<DwpUserModel>> responseEntity = new ResponseEntity(dwpUserModels, HttpStatus.OK);
-        Mockito.when(restTemplateMock.exchange(
+        DwpUserModel[] array = new DwpUserModel[dwpUserModels.size()];
+        array = dwpUserModels.toArray(array);
+        Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
-                ArgumentMatchers.eq(HttpMethod.GET),
-                ArgumentMatchers.<HttpEntity<List<DwpUserModel>>>any(),
-                ArgumentMatchers.<ParameterizedTypeReference<List<DwpUserModel>>>any()))
-                .thenReturn(responseEntity);
+                ArgumentMatchers.any()))
+                .thenReturn(new ResponseEntity(array, HttpStatus.OK));
 
         List<DwpUserModel> dwpUserModelsResult = dwpUsersService.findAll();
 

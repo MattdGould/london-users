@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,7 +27,18 @@ public class DwpUsersService implements UsersService<DwpUserModel> {
     @Override
     public List<DwpUserModel> findAll() {
 
-        return getApi(dwpUserServiceUrl, HttpMethod.GET);
+        //return getApi(dwpUserServiceUrl, HttpMethod.GET);
+        return getUsers();
+    }
+
+    protected List<DwpUserModel> getUsers() {
+        ResponseEntity<DwpUserModel[]> response =
+                restTemplate.getForEntity(
+                        dwpUserServiceUrl,
+                        DwpUserModel[].class);
+        DwpUserModel[] employees = response.getBody();
+        List<DwpUserModel> users = Arrays.asList(employees);
+        return users;
     }
 
     protected <T> List<T> getApi(final String path, final HttpMethod method) {

@@ -12,8 +12,8 @@ public class DwpUserModel {
     private String lastName;
     private String email;
     private String ipAddress;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
 
     public int getId() {
         return id;
@@ -55,19 +55,19 @@ public class DwpUserModel {
         this.ipAddress = ipAddress;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -92,14 +92,14 @@ public class DwpUserModel {
 
     @Override
     public String toString() {
-        return "UserModel{" +
+        return "DwpUserModel{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 '}';
     }
 }
