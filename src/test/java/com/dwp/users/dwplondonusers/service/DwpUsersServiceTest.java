@@ -37,7 +37,6 @@ public class DwpUsersServiceTest {
 
     @BeforeEach
     public void setUp() {
-        //https://bpdts-test-app.herokuapp.com/users
         ReflectionTestUtils.setField(dwpUsersService, "dwpUserServiceUrl", testUrl);
     }
 
