@@ -1,6 +1,6 @@
 package com.dwp.users.dwplondonusers.service;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ public class DwpUsersServiceTest {
     private DwpUsersService dwpUsersService;
 
     private String testUrl = "https://myTestHost.com/TestEndpoint";
-    private List<DwpUserModel> dwpUserModels = new ArrayList<>();
+    private List<DwpUser> dwpUsers = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {
@@ -88,15 +88,15 @@ public class DwpUsersServiceTest {
 
     @Test
     public void findAllWithNoResultsReturned() {
-        ResponseEntity<DwpUserModel> responseEntity = new ResponseEntity(dwpUserModels.toArray(), HttpStatus.OK);
-        DwpUserModel[] array = new DwpUserModel[dwpUserModels.size()];
-        array = dwpUserModels.toArray(array);
+        ResponseEntity<DwpUser> responseEntity = new ResponseEntity(dwpUsers.toArray(), HttpStatus.OK);
+        DwpUser[] array = new DwpUser[dwpUsers.size()];
+        array = dwpUsers.toArray(array);
         Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.any()))
                 .thenReturn(new ResponseEntity(array, HttpStatus.OK));
 
-        List<DwpUserModel> dwpUserModelsResult = dwpUsersService.findAll();
+        List<DwpUser> dwpUserModelsResult = dwpUsersService.findAll();
 
         assertEquals(0, dwpUserModelsResult.size());
     }
@@ -104,23 +104,23 @@ public class DwpUsersServiceTest {
     @Test
     public void findAllWithResultsReturned() {
         setUpUserModelsListWithResults();
-        DwpUserModel[] array = new DwpUserModel[dwpUserModels.size()];
-        array = dwpUserModels.toArray(array);
+        DwpUser[] array = new DwpUser[dwpUsers.size()];
+        array = dwpUsers.toArray(array);
         Mockito.when(restTemplateMock.getForEntity(
                 ArgumentMatchers.eq(testUrl),
                 ArgumentMatchers.any()))
                 .thenReturn(new ResponseEntity(array, HttpStatus.OK));
 
-        List<DwpUserModel> dwpUserModelsResult = dwpUsersService.findAll();
+        List<DwpUser> dwpUserModelsResult = dwpUsersService.findAll();
 
         assertEquals(2, dwpUserModelsResult.size());
     }
 
     private void setUpUserModelsListWithResults() {
-        DwpUserModel userModelOne = new DwpUserModel();
-        DwpUserModel userModelTwo = new DwpUserModel();
+        DwpUser userModelOne = new DwpUser();
+        DwpUser userModelTwo = new DwpUser();
 
-        dwpUserModels.add(userModelOne);
-        dwpUserModels.add(userModelTwo);
+        dwpUsers.add(userModelOne);
+        dwpUsers.add(userModelTwo);
     }
 }

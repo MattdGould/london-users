@@ -1,6 +1,6 @@
 package com.dwp.users.dwplondonusers.service;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class DwpUsersService implements UsersService<DwpUserModel> {
+public class DwpUsersService implements UsersService<DwpUser> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DwpUsersService.class);
 
@@ -28,20 +28,20 @@ public class DwpUsersService implements UsersService<DwpUserModel> {
     }
 
     @Override
-    public List<DwpUserModel> findAll() {
+    public List<DwpUser> findAll() {
 
         LOGGER.debug("Finding all users");
         return getUsers();
     }
 
-    protected List<DwpUserModel> getUsers() {
+    protected List<DwpUser> getUsers() {
         LOGGER.debug("Finding all users from endpoint " + dwpUserServiceUrl);
-        ResponseEntity<DwpUserModel[]> response =
+        ResponseEntity<DwpUser[]> response =
                 restTemplate.getForEntity(
                         dwpUserServiceUrl,
-                        DwpUserModel[].class);
-        DwpUserModel[] employees = response.getBody();
-        List<DwpUserModel> users = Arrays.asList(employees);
+                        DwpUser[].class);
+        DwpUser[] employees = response.getBody();
+        List<DwpUser> users = Arrays.asList(employees);
         LOGGER.debug("Found" + users.size() + " users from endpoint " + dwpUserServiceUrl);
         return users;
     }

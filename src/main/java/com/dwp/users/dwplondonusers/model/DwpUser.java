@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DwpUserModel {
+public class DwpUser {
 
     private int id;
     private String firstName;
@@ -74,15 +74,15 @@ public class DwpUserModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DwpUserModel)) return false;
-        DwpUserModel dwpUserModel = (DwpUserModel) o;
-        return getId() == dwpUserModel.getId() &&
-                Objects.equals(getFirstName(), dwpUserModel.getFirstName()) &&
-                Objects.equals(getLastName(), dwpUserModel.getLastName()) &&
-                Objects.equals(getEmail(), dwpUserModel.getEmail()) &&
-                Objects.equals(getIpAddress(), dwpUserModel.getIpAddress()) &&
-                Objects.equals(getLatitude(), dwpUserModel.getLatitude()) &&
-                Objects.equals(getLongitude(), dwpUserModel.getLongitude());
+        if (!(o instanceof DwpUser)) return false;
+        DwpUser dwpUser = (DwpUser) o;
+        return getId() == dwpUser.getId() &&
+                Objects.equals(getFirstName(), dwpUser.getFirstName()) &&
+                Objects.equals(getLastName(), dwpUser.getLastName()) &&
+                Objects.equals(getEmail(), dwpUser.getEmail()) &&
+                Objects.equals(getIpAddress(), dwpUser.getIpAddress()) &&
+                Objects.equals(getLatitude(), dwpUser.getLatitude()) &&
+                Objects.equals(getLongitude(), dwpUser.getLongitude());
     }
 
     @Override

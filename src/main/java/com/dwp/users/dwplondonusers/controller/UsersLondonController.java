@@ -1,6 +1,6 @@
 package com.dwp.users.dwplondonusers.controller;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 import com.dwp.users.dwplondonusers.service.UserToLondonDistanceService;
 import com.dwp.users.dwplondonusers.service.UsersService;
 import io.swagger.annotations.Api;
@@ -31,20 +31,20 @@ public class UsersLondonController {
 
     @ApiOperation(value = "Finds all users within 50 miles of London")
     @GetMapping(value = "/users/London/catchment", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DwpUserModel> getUsersNearLondon() {
+    public List<DwpUser> getUsersNearLondon() {
         LOGGER.info("entering /users/NearLondon");
-        List<DwpUserModel> usersNearLondon = getUsersNearLondon(MILES_IN_LONDON_CATCHMENT);
+        List<DwpUser> usersNearLondon = getUsersNearLondon(MILES_IN_LONDON_CATCHMENT);
         LOGGER.info("Users Near London Size: " + usersNearLondon.size());
         return usersNearLondon;
     }
 
     @ApiOperation(value = "Finds all users within requested miles of London")
     @GetMapping(value = "/users/London", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DwpUserModel> getUsersNearLondon(@RequestParam(value="distanceFrom") double distance) {
+    public List<DwpUser> getUsersNearLondon(@RequestParam(value="distanceFrom") double distance) {
         LOGGER.info("entering /users/London");
-        List<DwpUserModel> allUsers =  usersService.findAll();
+        List<DwpUser> allUsers =  usersService.findAll();
         LOGGER.info("All users Size: " + allUsers.size());
-        List<DwpUserModel> usersNearLondon = userToLondonDistanceService
+        List<DwpUser> usersNearLondon = userToLondonDistanceService
                 .findUsersWithinMilesOfLondon(allUsers, distance);
         LOGGER.info("Users within " + distance + " miles of London Size: " + usersNearLondon.size());
         return usersNearLondon;

@@ -1,6 +1,6 @@
 package com.dwp.users.dwplondonusers.service;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 import com.dwp.users.dwplondonusers.model.Location;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
@@ -27,9 +27,9 @@ public class UserToLondonDistanceServiceTest {
     @Test
     public void findUsersWithinMilesOfLondonFindsNoUsers() {
         EasyRandom easyRandom = new EasyRandom();
-        DwpUserModel userOne = easyRandom.nextObject(DwpUserModel.class);
-        DwpUserModel userTwo = easyRandom.nextObject(DwpUserModel.class);
-        List<DwpUserModel> userModelList = Arrays.asList(userOne, userTwo);
+        DwpUser userOne = easyRandom.nextObject(DwpUser.class);
+        DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
+        List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
         double milesFromLondon = 50;
 
         double distanceFromLondon = 60;
@@ -38,7 +38,7 @@ public class UserToLondonDistanceServiceTest {
                 ArgumentMatchers.any(Location.class)
         )).thenReturn(distanceFromLondon);
 
-        List<DwpUserModel> usersWithinMilesOfLondon = distanceService.findUsersWithinMilesOfLondon(userModelList, milesFromLondon);
+        List<DwpUser> usersWithinMilesOfLondon = distanceService.findUsersWithinMilesOfLondon(userModelList, milesFromLondon);
 
         Assertions.assertTrue(usersWithinMilesOfLondon.isEmpty());
         Mockito.verify(locationDistanceServiceMock, Mockito.times(userModelList.size())).milesDistanceBetweenLocations(
@@ -50,9 +50,9 @@ public class UserToLondonDistanceServiceTest {
     @Test
     public void findUsersWithinMilesOfLondonFindsUsers() {
         EasyRandom easyRandom = new EasyRandom();
-        DwpUserModel userOne = easyRandom.nextObject(DwpUserModel.class);
-        DwpUserModel userTwo = easyRandom.nextObject(DwpUserModel.class);
-        List<DwpUserModel> userModelList = Arrays.asList(userOne, userTwo);
+        DwpUser userOne = easyRandom.nextObject(DwpUser.class);
+        DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
+        List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
         double milesFromLondon = 50;
 
         double distanceFromLondon = 30;
@@ -61,7 +61,7 @@ public class UserToLondonDistanceServiceTest {
                 ArgumentMatchers.any(Location.class)
         )).thenReturn(distanceFromLondon);
 
-        List<DwpUserModel> usersWithinMilesOfLondon = distanceService.findUsersWithinMilesOfLondon(userModelList, milesFromLondon);
+        List<DwpUser> usersWithinMilesOfLondon = distanceService.findUsersWithinMilesOfLondon(userModelList, milesFromLondon);
 
         Assertions.assertEquals(2, usersWithinMilesOfLondon.size());
         Mockito.verify(locationDistanceServiceMock, Mockito.times(userModelList.size())).milesDistanceBetweenLocations(
@@ -72,7 +72,7 @@ public class UserToLondonDistanceServiceTest {
 
     @Test
     public void milesDistanceBetweenUserAndLondon() {
-        DwpUserModel userModel = new DwpUserModel();
+        DwpUser userModel = new DwpUser();
         userModel.setLatitude(5.7204203);
         userModel.setLongitude(10.901604);
         double expectedDistanceBetweenLocations = 50.55;

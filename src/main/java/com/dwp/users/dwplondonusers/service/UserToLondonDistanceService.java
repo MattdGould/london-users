@@ -1,13 +1,13 @@
 package com.dwp.users.dwplondonusers.service;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 
 import java.util.List;
 
 public interface UserToLondonDistanceService{
 
-    List<DwpUserModel> findUsersWithinMilesOfLondon(List<DwpUserModel> users, double milesFromLondon);
+    List<DwpUser> findUsersWithinMilesOfLondon(List<DwpUser> users, double milesFromLondon);
 
-    double milesDistanceBetweenUserAndLondon(DwpUserModel userModel);
+    double milesDistanceBetweenUserAndLondon(DwpUser userModel);
 
 }

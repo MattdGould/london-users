@@ -1,6 +1,6 @@
 package com.dwp.users.dwplondonusers.controller;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 import com.dwp.users.dwplondonusers.service.UserToLondonDistanceService;
 import com.dwp.users.dwplondonusers.service.UsersService;
 import org.jeasy.random.EasyRandom;
@@ -36,9 +36,9 @@ public class UsersLondonControllerTest {
     @Test
     public void getUsersNearLondonFindsResults() throws Exception {
         EasyRandom easyRandom = new EasyRandom();
-        DwpUserModel userOne = easyRandom.nextObject(DwpUserModel.class);
-        DwpUserModel userTwo = easyRandom.nextObject(DwpUserModel.class);
-        List<DwpUserModel> userModelList = Arrays.asList(userOne, userTwo);
+        DwpUser userOne = easyRandom.nextObject(DwpUser.class);
+        DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
+        List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
         when(usersService.findAll()).thenReturn(userModelList);
 
@@ -56,9 +56,9 @@ public class UsersLondonControllerTest {
     @Test
     public void getUsersNearLondonFindsNoResults() throws Exception {
         EasyRandom easyRandom = new EasyRandom();
-        DwpUserModel userOne = easyRandom.nextObject(DwpUserModel.class);
-        DwpUserModel userTwo = easyRandom.nextObject(DwpUserModel.class);
-        List<DwpUserModel> userModelList = Arrays.asList(userOne, userTwo);
+        DwpUser userOne = easyRandom.nextObject(DwpUser.class);
+        DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
+        List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
         when(usersService.findAll()).thenReturn(userModelList);
 
@@ -76,9 +76,9 @@ public class UsersLondonControllerTest {
     @Test
     public void testGetUsersNearLondonFindsResults() throws Exception {
         EasyRandom easyRandom = new EasyRandom();
-        DwpUserModel userOne = easyRandom.nextObject(DwpUserModel.class);
-        DwpUserModel userTwo = easyRandom.nextObject(DwpUserModel.class);
-        List<DwpUserModel> userModelList = Arrays.asList(userOne, userTwo);
+        DwpUser userOne = easyRandom.nextObject(DwpUser.class);
+        DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
+        List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
         when(usersService.findAll()).thenReturn(userModelList);
 
@@ -97,9 +97,9 @@ public class UsersLondonControllerTest {
     @Test
     public void testGetUsersNearLondonFindsNoResults() throws Exception {
         EasyRandom easyRandom = new EasyRandom();
-        DwpUserModel userOne = easyRandom.nextObject(DwpUserModel.class);
-        DwpUserModel userTwo = easyRandom.nextObject(DwpUserModel.class);
-        List<DwpUserModel> userModelList = Arrays.asList(userOne, userTwo);
+        DwpUser userOne = easyRandom.nextObject(DwpUser.class);
+        DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
+        List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
         when(usersService.findAll()).thenReturn(userModelList);
 

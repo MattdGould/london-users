@@ -1,6 +1,6 @@
 package com.dwp.users.dwplondonusers.service;
 
-import com.dwp.users.dwplondonusers.model.DwpUserModel;
+import com.dwp.users.dwplondonusers.model.DwpUser;
 import com.dwp.users.dwplondonusers.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,11 @@ public class UserToLondonDistanceServiceImpl implements UserToLondonDistanceServ
     }
 
     @Override
-    public List<DwpUserModel> findUsersWithinMilesOfLondon(List<DwpUserModel> users, double milesFromLondon) {
+    public List<DwpUser> findUsersWithinMilesOfLondon(List<DwpUser> users, double milesFromLondon) {
         LOGGER.debug("Finding all users within miles of london: " + milesFromLondon);
-        List<DwpUserModel> usersWithinMilesFromLondon = new ArrayList<>();
+        List<DwpUser> usersWithinMilesFromLondon = new ArrayList<>();
 
-        for (DwpUserModel user : users) {
+        for (DwpUser user : users) {
             double distanceToLondon = milesDistanceBetweenUserAndLondon(user);
             if(distanceToLondon <= milesFromLondon) {
                 usersWithinMilesFromLondon.add(user);
@@ -41,7 +41,7 @@ public class UserToLondonDistanceServiceImpl implements UserToLondonDistanceServ
     }
 
     @Override
-    public double milesDistanceBetweenUserAndLondon(DwpUserModel userModel) {
+    public double milesDistanceBetweenUserAndLondon(DwpUser userModel) {
         LOGGER.debug("Finding miles distance between user and London, user is: " + userModel);
         Location userLocation = new Location();
         userLocation.setLongitude(userModel.getLongitude());
