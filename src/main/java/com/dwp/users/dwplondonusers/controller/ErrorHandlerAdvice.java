@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
 @ControllerAdvice
 public class ErrorHandlerAdvice {
 
@@ -15,12 +14,6 @@ public class ErrorHandlerAdvice {
     @ExceptionHandler({RuntimeException.class})
     public String handleRunTimeException(RuntimeException e) {
         LOGGER.error("RuntimeException caught. Error is : ", e);
-        return "/error/error";
-    }
-
-    @ExceptionHandler({Exception.class})
-    public String handleExceptionException(Exception e) {
-        LOGGER.error("Exception caught. Error is : ", e);
         return "/error/error";
     }
 
