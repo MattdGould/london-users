@@ -19,6 +19,7 @@ import java.util.List;
 public class UsersLondonController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UsersLondonController.class);
+    public static final int MILES_IN_LONDON_CATCHMENT = 50;
 
     private final UserToLondonDistanceService userToLondonDistanceService;
     private final UsersService usersService;
@@ -32,10 +33,7 @@ public class UsersLondonController {
     @GetMapping(value = "/users/London/catchment", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DwpUserModel> getUsersNearLondon() {
         LOGGER.info("entering /users/NearLondon");
-        List<DwpUserModel> allUsers =  usersService.findAll();
-        LOGGER.info("All users Size: " + allUsers.size());
-        List<DwpUserModel> usersNearLondon = userToLondonDistanceService
-                .findUsersWithinMilesOfLondon(allUsers, 50);
+        List<DwpUserModel> usersNearLondon = getUsersNearLondon(MILES_IN_LONDON_CATCHMENT);
         LOGGER.info("Users Near London Size: " + usersNearLondon.size());
         return usersNearLondon;
     }

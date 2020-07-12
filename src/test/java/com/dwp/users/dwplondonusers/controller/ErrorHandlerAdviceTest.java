@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest
-class ErrorHandlerAdviceTest {
+public class ErrorHandlerAdviceTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,7 +27,7 @@ class ErrorHandlerAdviceTest {
     private UsersService usersService;
 
     @Test
-    void handleRunTimeException() throws Exception {
+    public void handleRunTimeException() throws Exception {
         when(usersService.findAll()).thenThrow(new RuntimeException());
 
         this.mockMvc.perform(get("/users/London/catchment"))
