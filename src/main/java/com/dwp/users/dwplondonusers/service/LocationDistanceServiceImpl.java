@@ -1,26 +1,36 @@
 package com.dwp.users.dwplondonusers.service;
 
 import com.dwp.users.dwplondonusers.model.Location;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LocationDistanceServiceImpl implements LocationDistanceService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocationDistanceServiceImpl.class);
+    public static final double NO_METERS_IN_MILE = 1609.34;
+
     @Override
     public double milesDistanceBetweenLocations(Location locationOne, Location locationTwo) {
+        LOGGER.debug("Entered milesDistanceBetweenLocations");
         double distanceInMeters = metersDistanceBetweenLocations(locationOne, locationTwo);
-        double distanceInMiles = distanceInMeters / 1609.34;
+        double distanceInMiles = distanceInMeters / NO_METERS_IN_MILE;
+        LOGGER.debug("Distance in miles between locations: " + distanceInMiles + "location one: " + locationOne + "location two: " + locationTwo);
         return distanceInMiles;
     }
 
     @Override
     public double metersDistanceBetweenLocations(Location locationOne, Location locationTwo) {
-        return distance(locationOne.getLatitude(),
+        LOGGER.debug("Entered metersDistanceBetweenLocations");
+        double distanceInMeters =  distance(locationOne.getLatitude(),
                 locationTwo.getLatitude(),
                 locationOne.getLongitude(),
                 locationTwo.getLongitude(),
                 0,
                 0);
+        LOGGER.debug("Distance in meters between locations: " + distanceInMeters + "location one: " + locationOne + "location two: " + locationTwo);
+        return distanceInMeters;
     }
 
     /**
@@ -52,26 +62,4 @@ public class LocationDistanceServiceImpl implements LocationDistanceService {
         //distance in meters
         return Math.sqrt(distance);
     }
-
-
-
-/*    @Override
-    public double distanceBetweenLocations(Location locationOne, Location locationTwo) {
-
-        double a = locationOne.getLongitude() - locationTwo.getLongitude();
-        double b = locationOne.getLatitude() - locationTwo.getLatitude();
-
-        double aSquared = square(a);
-        double bSquared = square(b);
-
-        double aAndBSquared = aSquared + bSquared;
-
-        double c = Math.sqrt(aAndBSquared);
-
-        return c;
-    }
-
-    private double square(double numberToSquare) {
-        return Math.pow(numberToSquare, 2);
-    }*/
 }

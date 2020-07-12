@@ -3,7 +3,8 @@ package com.dwp.users.dwplondonusers.controller;
 import com.dwp.users.dwplondonusers.model.DwpUserModel;
 import com.dwp.users.dwplondonusers.service.UserToLondonDistanceService;
 import com.dwp.users.dwplondonusers.service.UsersService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @RestController
 public class HelloWorldController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldController.class);
 
     private final UserToLondonDistanceService userToLondonDistanceService;
     private final UsersService usersService;
@@ -33,11 +36,12 @@ public class HelloWorldController {
 
     @GetMapping("/usersNearLondon")
     public List<DwpUserModel> getUsersNearLondon() {
+        LOGGER.info("entering /usersNearLondon");
         List<DwpUserModel> allUsers =  usersService.findAll();
-        System.out.println("All users Size: " + allUsers.size());
+        LOGGER.info("All users Size: " + allUsers.size());
         List<DwpUserModel> usersNearLondon = userToLondonDistanceService
                 .findUsersWithinMilesOfLondon(allUsers, 50);
-        System.out.println("Users Near London Size: " + usersNearLondon.size());
+        LOGGER.info("Users Near London Size: " + usersNearLondon.size());
         return usersNearLondon;
     }
 }
