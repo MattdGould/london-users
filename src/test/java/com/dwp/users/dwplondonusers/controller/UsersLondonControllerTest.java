@@ -45,7 +45,7 @@ public class UsersLondonControllerTest {
         when(distanceService.findUsersWithinMilesOfLondon(userModelList, 50))
                 .thenReturn(userModelList);
 
-        String expectedResult = "[{\"id\":-1188957731,\"firstName\":\"eOMtThyhVNLWUZNRcBaQKxI\",\"lastName\":\"yedUsFwdkelQbxeTeQOvaScfqIOOmaa\",\"email\":\"JxkyvRnL\",\"ipAddress\":\"RYtGKbgicZaHCBRQDSx\",\"latitude\":0.7231742029971469,\"longitude\":0.9908988967772393},{\"id\":1018954901,\"firstName\":\"VLhpfQGTMDYpsBZxvfBoeygjb\",\"lastName\":\"UMaAIKKIkknjWEXJUfPxxQHeWKEJ\",\"email\":\"dpHYZGhtgdntugzvvKAXLhM\",\"ipAddress\":\"LlN\",\"latitude\":0.25329310557439133,\"longitude\":0.6088003703785169}]";
+        String expectedResult = "[{\"id\":-1188957731,\"email\":\"JxkyvRnL\",\"latitude\":0.7231742029971469,\"longitude\":0.9908988967772393,\"first_name\":\"eOMtThyhVNLWUZNRcBaQKxI\",\"last_name\":\"yedUsFwdkelQbxeTeQOvaScfqIOOmaa\",\"ip_address\":\"RYtGKbgicZaHCBRQDSx\"},{\"id\":1018954901,\"email\":\"dpHYZGhtgdntugzvvKAXLhM\",\"latitude\":0.25329310557439133,\"longitude\":0.6088003703785169,\"first_name\":\"VLhpfQGTMDYpsBZxvfBoeygjb\",\"last_name\":\"UMaAIKKIkknjWEXJUfPxxQHeWKEJ\",\"ip_address\":\"LlN\"}]";
 
         this.mockMvc.perform(get("/users/London/catchment"))
                 .andDo(print())
@@ -85,7 +85,7 @@ public class UsersLondonControllerTest {
         when(distanceService.findUsersWithinMilesOfLondon(userModelList, 30))
                 .thenReturn(userModelList);
 
-        String expectedResult = "[{\"id\":-1188957731,\"firstName\":\"eOMtThyhVNLWUZNRcBaQKxI\",\"lastName\":\"yedUsFwdkelQbxeTeQOvaScfqIOOmaa\",\"email\":\"JxkyvRnL\",\"ipAddress\":\"RYtGKbgicZaHCBRQDSx\",\"latitude\":0.7231742029971469,\"longitude\":0.9908988967772393},{\"id\":1018954901,\"firstName\":\"VLhpfQGTMDYpsBZxvfBoeygjb\",\"lastName\":\"UMaAIKKIkknjWEXJUfPxxQHeWKEJ\",\"email\":\"dpHYZGhtgdntugzvvKAXLhM\",\"ipAddress\":\"LlN\",\"latitude\":0.25329310557439133,\"longitude\":0.6088003703785169}]";
+        String expectedResult = "[{\"id\":-1188957731,\"email\":\"JxkyvRnL\",\"latitude\":0.7231742029971469,\"longitude\":0.9908988967772393,\"first_name\":\"eOMtThyhVNLWUZNRcBaQKxI\",\"last_name\":\"yedUsFwdkelQbxeTeQOvaScfqIOOmaa\",\"ip_address\":\"RYtGKbgicZaHCBRQDSx\"},{\"id\":1018954901,\"email\":\"dpHYZGhtgdntugzvvKAXLhM\",\"latitude\":0.25329310557439133,\"longitude\":0.6088003703785169,\"first_name\":\"VLhpfQGTMDYpsBZxvfBoeygjb\",\"last_name\":\"UMaAIKKIkknjWEXJUfPxxQHeWKEJ\",\"ip_address\":\"LlN\"}]";
 
         this.mockMvc.perform(get("/users/London")
                 .param("distanceFrom", "30"))

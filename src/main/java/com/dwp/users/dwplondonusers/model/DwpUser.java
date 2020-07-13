@@ -1,6 +1,7 @@
 package com.dwp.users.dwplondonusers.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
@@ -8,9 +9,15 @@ import java.util.Objects;
 public class DwpUser {
 
     private int id;
+
+    @JsonProperty("first_name")
     private String firstName;
+
+    @JsonProperty("last_name")
     private String lastName;
     private String email;
+
+    @JsonProperty("ip_address")
     private String ipAddress;
     private Double latitude;
     private Double longitude;
