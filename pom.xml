@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dwp.users</groupId>
-    <artifactId>dwp-london-users</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>dwp-london-users</name>
+    <artifactId>mg-dwp-london-users</artifactId>
+    <version>0.0.1.RELEASE</version>
+    <name>mg-dwp-london-users</name>
     <description>DWP assessment to find users 50 miles from London</description>
 
     <properties>
