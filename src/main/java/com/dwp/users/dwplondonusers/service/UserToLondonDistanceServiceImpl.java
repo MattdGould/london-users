@@ -13,6 +13,8 @@ import java.util.List;
 public class UserToLondonDistanceServiceImpl implements UserToLondonDistanceService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserToLondonDistanceServiceImpl.class);
+    public static final double LONDON_LATITUDE = 51.509865;
+    public static final double LONDON_LONGITUDE = -0.118092;
 
     private final Location londonLocation;
 
@@ -20,8 +22,8 @@ public class UserToLondonDistanceServiceImpl implements UserToLondonDistanceServ
 
     public UserToLondonDistanceServiceImpl(LocationDistanceService locationDistanceService) {
         londonLocation = new Location();
-        londonLocation.setLatitude(51.509865);
-        londonLocation.setLongitude(-0.118092);
+        londonLocation.setLatitude(LONDON_LATITUDE);
+        londonLocation.setLongitude(LONDON_LONGITUDE);
         this.locationDistanceService = locationDistanceService;
     }
 
