@@ -1,4 +1,4 @@
-package com.dwp.users.dwplondonusers.service;
+package com.dwp.users.dwplondonusers.service.user;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
 import com.dwp.users.dwplondonusers.service.user.DwpUsersService;
@@ -35,7 +35,7 @@ public class DwpUsersServiceTest {
     @InjectMocks
     private DwpUsersService dwpUsersService;
 
-    private String testUrl = "https://myTestHost.com/TestEndpoint";
+    private String testUrl = "https://myTestHost.com/testEndpoint";
     private List<DwpUser> dwpUsers = new ArrayList<>();
 
     @BeforeEach

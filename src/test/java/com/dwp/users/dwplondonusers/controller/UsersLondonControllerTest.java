@@ -1,8 +1,7 @@
 package com.dwp.users.dwplondonusers.controller;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
-import com.dwp.users.dwplondonusers.service.distance.UserToLondonDistanceService;
-import com.dwp.users.dwplondonusers.service.user.UsersService;
+import com.dwp.users.dwplondonusers.service.result.UserResultService;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +27,7 @@ public class UsersLondonControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserToLondonDistanceService distanceService;
-
-    @MockBean
-    private UsersService usersService;
+    private UserResultService userResultService;
 
     @Test
     public void getUsersNearLondonFindsResults() throws Exception {
@@ -40,9 +36,8 @@ public class UsersLondonControllerTest {
         DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
         List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
-        when(usersService.findAll()).thenReturn(userModelList);
 
-        when(distanceService.findUsersWithinMilesOfLondon(userModelList, 50))
+        when(userResultService.getUsersNearLondon(50))
                 .thenReturn(userModelList);
 
         String expectedResult = "[{\"id\":-1188957731,\"email\":\"JxkyvRnL\",\"latitude\":0.7231742029971469,\"longitude\":0.9908988967772393,\"first_name\":\"eOMtThyhVNLWUZNRcBaQKxI\",\"last_name\":\"yedUsFwdkelQbxeTeQOvaScfqIOOmaa\",\"ip_address\":\"RYtGKbgicZaHCBRQDSx\"},{\"id\":1018954901,\"email\":\"dpHYZGhtgdntugzvvKAXLhM\",\"latitude\":0.25329310557439133,\"longitude\":0.6088003703785169,\"first_name\":\"VLhpfQGTMDYpsBZxvfBoeygjb\",\"last_name\":\"UMaAIKKIkknjWEXJUfPxxQHeWKEJ\",\"ip_address\":\"LlN\"}]";
@@ -60,9 +55,7 @@ public class UsersLondonControllerTest {
         DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
         List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
-        when(usersService.findAll()).thenReturn(userModelList);
-
-        when(distanceService.findUsersWithinMilesOfLondon(userModelList, 50))
+        when(userResultService.getUsersNearLondon(50))
                 .thenReturn(Collections.emptyList());
 
         String expectedResult = "[]";
@@ -80,9 +73,7 @@ public class UsersLondonControllerTest {
         DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
         List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
-        when(usersService.findAll()).thenReturn(userModelList);
-
-        when(distanceService.findUsersWithinMilesOfLondon(userModelList, 30))
+        when(userResultService.getUsersNearLondon(30))
                 .thenReturn(userModelList);
 
         String expectedResult = "[{\"id\":-1188957731,\"email\":\"JxkyvRnL\",\"latitude\":0.7231742029971469,\"longitude\":0.9908988967772393,\"first_name\":\"eOMtThyhVNLWUZNRcBaQKxI\",\"last_name\":\"yedUsFwdkelQbxeTeQOvaScfqIOOmaa\",\"ip_address\":\"RYtGKbgicZaHCBRQDSx\"},{\"id\":1018954901,\"email\":\"dpHYZGhtgdntugzvvKAXLhM\",\"latitude\":0.25329310557439133,\"longitude\":0.6088003703785169,\"first_name\":\"VLhpfQGTMDYpsBZxvfBoeygjb\",\"last_name\":\"UMaAIKKIkknjWEXJUfPxxQHeWKEJ\",\"ip_address\":\"LlN\"}]";
@@ -101,9 +92,7 @@ public class UsersLondonControllerTest {
         DwpUser userTwo = easyRandom.nextObject(DwpUser.class);
         List<DwpUser> userModelList = Arrays.asList(userOne, userTwo);
 
-        when(usersService.findAll()).thenReturn(userModelList);
-
-        when(distanceService.findUsersWithinMilesOfLondon(userModelList, 30))
+        when(userResultService.getUsersNearLondon(30))
                 .thenReturn(Collections.emptyList());
 
         String expectedResult = "[]";

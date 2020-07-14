@@ -1,8 +1,7 @@
 package com.dwp.users.dwplondonusers.controller;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
-import com.dwp.users.dwplondonusers.service.distance.UserToLondonDistanceService;
-import com.dwp.users.dwplondonusers.service.user.UsersService;
+import com.dwp.users.dwplondonusers.service.result.UserResultService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -19,21 +18,18 @@ import java.util.List;
 public class UsersLondonController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UsersLondonController.class);
-    public static final int MILES_IN_LONDON_CATCHMENT = 50;
 
-    private final UserToLondonDistanceService userToLondonDistanceService;
-    private final UsersService usersService;
+    private final UserResultService userResultService;
 
-    public UsersLondonController(UserToLondonDistanceService userToLondonDistanceService, UsersService usersService) {
-        this.userToLondonDistanceService = userToLondonDistanceService;
-        this.usersService = usersService;
+    public UsersLondonController(UserResultService userResultService) {
+        this.userResultService = userResultService;
     }
 
     @ApiOperation(value = "Finds all users within 50 miles of London")
     @GetMapping(value = "/users/London/catchment", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DwpUser> getUsersNearLondon() {
         LOGGER.info("entering /users/NearLondon");
-        List<DwpUser> usersNearLondon = getUsersNearLondon(MILES_IN_LONDON_CATCHMENT);
+        List<DwpUser> usersNearLondon = getUsersNearLondon(UserResultService.MILES_IN_LONDON_CATCHMENT);
         LOGGER.info("Users Near London Size: " + usersNearLondon.size());
         return usersNearLondon;
     }
@@ -42,10 +38,7 @@ public class UsersLondonController {
     @GetMapping(value = "/users/London", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DwpUser> getUsersNearLondon(@RequestParam(value="distanceFrom") double distance) {
         LOGGER.info("entering /users/London");
-        List<DwpUser> allUsers =  usersService.findAll();
-        LOGGER.info("All users Size: " + allUsers.size());
-        List<DwpUser> usersNearLondon = userToLondonDistanceService
-                .findUsersWithinMilesOfLondon(allUsers, distance);
+        List<DwpUser> usersNearLondon = userResultService.getUsersNearLondon(distance);
         LOGGER.info("Users within " + distance + " miles of London Size: " + usersNearLondon.size());
         return usersNearLondon;
     }
