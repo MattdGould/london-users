@@ -15,7 +15,6 @@ public class UserResultServiceImpl implements UserResultService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserResultServiceImpl.class);
 
-
     private final UserToLondonDistanceService userToLondonDistanceService;
     private final UsersService usersService;
 
@@ -32,13 +31,14 @@ public class UserResultServiceImpl implements UserResultService {
 
     @Override
     public List<DwpUser> getUsersNearLondon(double distanceFrom) {
+        LOGGER.info("Getting all users within the London catchment area of: " + distanceFrom);
         List<DwpUser> allUsers = new ArrayList<>();
         allUsers.addAll( usersService.findAll() );
         LOGGER.info("All users Size: " + allUsers.size());
         List<DwpUser> usersNearLondon = userToLondonDistanceService
                 .findUsersWithinMilesOfLondon(allUsers, distanceFrom);
         LOGGER.info("Users within " + distanceFrom + " miles of London Size: " + usersNearLondon.size());
-        return allUsers;
+        return usersNearLondon;
     }
 
 }

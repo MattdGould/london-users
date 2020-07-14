@@ -28,7 +28,7 @@ public class UsersLondonController {
     @ApiOperation(value = "Finds all users within 50 miles of London")
     @GetMapping(value = "/users/London/catchment", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DwpUser> getUsersNearLondon() {
-        LOGGER.info("entering /users/NearLondon");
+        LOGGER.info("entering /users/London/catchment");
         List<DwpUser> usersNearLondon = getUsersNearLondon(UserResultService.MILES_IN_LONDON_CATCHMENT);
         LOGGER.info("Users Near London Size: " + usersNearLondon.size());
         return usersNearLondon;
