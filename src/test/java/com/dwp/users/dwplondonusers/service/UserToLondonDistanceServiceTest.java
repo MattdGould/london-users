@@ -2,6 +2,8 @@ package com.dwp.users.dwplondonusers.service;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
 import com.dwp.users.dwplondonusers.model.Location;
+import com.dwp.users.dwplondonusers.service.distance.LocationDistanceService;
+import com.dwp.users.dwplondonusers.service.distance.UserToLondonDistanceServiceImpl;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

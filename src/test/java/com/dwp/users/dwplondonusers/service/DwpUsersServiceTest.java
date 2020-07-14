@@ -1,6 +1,7 @@
 package com.dwp.users.dwplondonusers.service;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
+import com.dwp.users.dwplondonusers.service.user.DwpUsersService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

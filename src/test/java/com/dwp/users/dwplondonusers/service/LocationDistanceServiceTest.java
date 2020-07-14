@@ -1,6 +1,8 @@
 package com.dwp.users.dwplondonusers.service;
 
 import com.dwp.users.dwplondonusers.model.Location;
+import com.dwp.users.dwplondonusers.service.distance.LocationDistanceService;
+import com.dwp.users.dwplondonusers.service.distance.LocationDistanceServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.dwp.users.dwplondonusers.controller;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
-import com.dwp.users.dwplondonusers.service.UserToLondonDistanceService;
-import com.dwp.users.dwplondonusers.service.UsersService;
+import com.dwp.users.dwplondonusers.service.distance.UserToLondonDistanceService;
+import com.dwp.users.dwplondonusers.service.user.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

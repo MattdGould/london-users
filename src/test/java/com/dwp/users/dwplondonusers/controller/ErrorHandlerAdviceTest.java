@@ -1,7 +1,7 @@
 package com.dwp.users.dwplondonusers.controller;
 
-import com.dwp.users.dwplondonusers.service.UserToLondonDistanceService;
-import com.dwp.users.dwplondonusers.service.UsersService;
+import com.dwp.users.dwplondonusers.service.distance.UserToLondonDistanceService;
+import com.dwp.users.dwplondonusers.service.user.UsersService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

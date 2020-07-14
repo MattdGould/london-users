@@ -1,4 +1,4 @@
-package com.dwp.users.dwplondonusers.service;
+package com.dwp.users.dwplondonusers.service.user;
 
 import com.dwp.users.dwplondonusers.model.DwpUser;
 import org.slf4j.Logger;

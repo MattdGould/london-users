@@ -1,4 +1,4 @@
-package com.dwp.users.dwplondonusers.service;
+package com.dwp.users.dwplondonusers.service.user;
 
 import java.util.List;
 
